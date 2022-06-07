@@ -2,9 +2,9 @@ package basic_recursion;
 
 public class Fibonacci {
     public static void main(String[] args) {
-        System.out.println(recursiveFib(45));
-        System.out.println(dynamicFib(45));
-        System.out.println(dynamicFibOptimized(45));
+        System.out.println(recursiveFib(9));
+        System.out.println(dynamicFib(9));
+        System.out.println(dynamicFibOptimized(9));
     }
 
     private static long recursiveFib(long i) {
@@ -16,16 +16,16 @@ public class Fibonacci {
     }
 
     private static long dynamicFib(int n) {
-        long[] f = new long[n + 2];
-        int i;
+        long[] arr = new long[n + 2];
 
-        f[0] = 0;
-        f[1] = 1;
+        arr[0] = 0;
+        arr[1] = 1;
 
-        for (i = 2; i <= n; i++) {
-            f[i] = f[i - 1] + f[i - 2];
+        for (int i = 2; i <= n; i++) {
+            arr[i] = arr[i - 1] + arr[i - 2];
         }
-        return f[n];
+
+        return arr[n];
     }
 
     private static long dynamicFibOptimized(int n) {
@@ -44,15 +44,3 @@ public class Fibonacci {
         return b;
     }
 }
-
-/**
- * fib(5)
- * /                \
- * fib(4)                fib(3)
- * /        \              /       \
- * fib(3)      fib(2)         fib(2)   fib(1)
- * /    \       /    \        /      \
- * fib(2)   fib(1)  fib(1) fib(0) fib(1) fib(0)
- * /     \
- * fib(1) fib(0)
- **/

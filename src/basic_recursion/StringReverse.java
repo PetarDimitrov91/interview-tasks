@@ -3,6 +3,8 @@ package basic_recursion;
 public class StringReverse {
     public static void main(String[] args) {
         System.out.println(reverse("Petar"));
+
+        new StringBuilder("sadasd").reverse();
     }
 
     private static String reverse(String str) {
