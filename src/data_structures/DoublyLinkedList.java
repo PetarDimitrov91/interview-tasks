@@ -1,8 +1,10 @@
 package data_structures;
 
+import java.lang.reflect.Array;
+import java.util.Iterator;
 import java.util.function.Consumer;
 
-public class DoublyLinkedList<T> {
+public class DoublyLinkedList<T> implements Iterable<T> {
 
     private static class Node<T> {
         private final T el;
@@ -17,6 +19,10 @@ public class DoublyLinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
+
+    public DoublyLinkedList() {
+        this.size = 0;
+    }
 
     public void addFirst(T el) {
         Node<T> newNode = new Node<>(el);
@@ -85,11 +91,61 @@ public class DoublyLinkedList<T> {
         }
     }
 
+
     public void forEach(Consumer<? super T> action) {
-        Node<T> currentNode = this.head;
-        while (currentNode != null) {
-            action.accept(currentNode.el);
-            currentNode = currentNode.next;
+        Node<T> currNode = this.head;
+        while (currNode != null) {
+            action.accept(currNode.el);
+            currNode = currNode.next;
         }
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<>() {
+            private Node<T> current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                T curr = current.el;
+                this.current = current.next;
+                return curr;
+            }
+        };
+    }
+
+    @SuppressWarnings("unchecked")
+    public T[] toArray(Class<? extends T> a) {
+        T[] arr = (T[]) Array.newInstance(a, this.size);
+        if (this.size == 0) {
+            return arr;
+        }
+
+        Node<T> current = head;
+
+        for (int i = 0; i < this.size; i++) {
+            arr[i] = current.el;
+            current = current.next;
+        }
+
+        return arr;
+    }
 }
+/*
+  @SuppressWarnings("unchecked")
+        public <T> T[] toArray(T[] a) {
+            int size = size();
+            if (a.length < size)
+                return Arrays.copyOf(this.a, size,
+                                     (Class<? extends T[]>) a.getClass());
+            System.arraycopy(this.a, 0, a, 0, size);
+            if (a.length > size)
+                a[size] = null;
+            return a;
+        }
+ */
