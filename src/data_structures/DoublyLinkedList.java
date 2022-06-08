@@ -136,16 +136,3 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         return arr;
     }
 }
-/*
-  @SuppressWarnings("unchecked")
-        public <T> T[] toArray(T[] a) {
-            int size = size();
-            if (a.length < size)
-                return Arrays.copyOf(this.a, size,
-                                     (Class<? extends T[]>) a.getClass());
-            System.arraycopy(this.a, 0, a, 0, size);
-            if (a.length > size)
-                a[size] = null;
-            return a;
-        }
- */
