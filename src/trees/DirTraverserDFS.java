@@ -1,20 +1,35 @@
 package trees;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DirTraverserDFS {
-    static int filesCount = 0;
-    static int dirCount = 0;
+    static AtomicInteger filesCount = new AtomicInteger(0);
+    static AtomicInteger dirCount = new AtomicInteger(0);
 
-    public static void main(String[] args) {
-        String[] drives = new String[]{"D:\\", "E:\\"};
+    public static void main(String[] args) throws InterruptedException {
+        String[] drives = new String[]{"C:\\", "D:\\", "E:\\"};
+        ExecutorService executor = Executors.newFixedThreadPool(8);
 
-        for (String drive : drives) {
-            traverseDir(drive);
-        }
 
-        System.out.println(filesCount);
-        System.out.println(dirCount);
+        Arrays.stream(drives).parallel()
+                .forEach(drive -> executor.execute(() -> traverseDir(drive)));
+        //executor.execute(() -> traverseDir(drive));
+        // traverseDir(drive);
+
+
+        executor.shutdown();
+        System.out.println(filesCount.get());
+        System.out.println(dirCount.get());
+
+
+        // traverseDir(drive);
+
     }
 
     /**
@@ -26,7 +41,7 @@ public class DirTraverserDFS {
      */
     private static void traverseDir(File dir, String spaces) {
         if (dir.isDirectory()) {
-            dirCount++;
+            dirCount.incrementAndGet();
             System.out.println(spaces + dir.getAbsolutePath());
             String[] children = dir.list();
 
@@ -36,7 +51,7 @@ public class DirTraverserDFS {
                 }
             }
         } else if (dir.isFile()) {
-            filesCount++;
+            filesCount.incrementAndGet();
             System.out.println(spaces + "       " + dir.getAbsolutePath());
         }
     }

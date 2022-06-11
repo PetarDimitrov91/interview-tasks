@@ -96,6 +96,7 @@ public class Tree<T> {
      * @param value    - the value of the root node.
      * @param children - the children of the root node.
      */
+    @SafeVarargs
     public Tree(T value, Tree<T>... children) throws IllegalAccessException {
         this(value);
 
