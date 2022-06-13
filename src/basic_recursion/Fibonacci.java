@@ -1,14 +1,14 @@
 package basic_recursion;
 
 public class Fibonacci {
-    static int num = 100;
+    static int num = 9;
     static long[] memory = new long[num + 1];
 
     public static void main(String[] args) {
         memory[0] = 0;
         memory[1] = 1;
         // System.out.println(fibDynamic(num));
-        // System.out.println(fibRecursiveOptimized(num));
+         System.out.println(fibRecursiveOptimized(num));
         // System.out.println(fibDynamicOpt(num));
 
         int a = 5;

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represents a tree data structure.
  *
- * @param <T> - the type of the values in the tree.
+ * @param <T> the type of the values in the tree.
  * @author Petar Dimitrov
  */
 public class Tree<T> {
@@ -20,12 +20,12 @@ public class Tree<T> {
     private static class TreeNode<T> {
         private T value;
         private boolean hasParent;
-        private List<TreeNode<T>> children;
+        private final List<TreeNode<T>> children;
 
         /**
          * Constructs a tree node.
          *
-         * @param value - the value of the node.
+         * @param value the value of the node.
          */
         public TreeNode(T value) throws IllegalAccessException {
             if (value == null) {
@@ -60,7 +60,7 @@ public class Tree<T> {
         /**
          * Gets the child of the node at given index.
          *
-         * @param index - the index of the desired child.
+         * @param index the index of the desired child.
          * @return the child on the given position.
          */
         public TreeNode<T> getChild(int index) {
@@ -80,7 +80,7 @@ public class Tree<T> {
     /**
      * Constructs the tree.
      *
-     * @param value - the value of the node.
+     * @param value the value of the node.
      */
     public Tree(T value) throws IllegalAccessException {
         if (value == null) {
@@ -121,10 +121,8 @@ public class Tree<T> {
      * Traverses and prints tree in
      * Depth First Search (DFS) manner.
      *
-     * @param root   - the root of the tree
-     *               to be traversed.
-     * @param spaces - the spaces used for
-     *               representation of the parent-child relation.
+     * @param root the root of the tree to be traversed.
+     * @param spaces the spaces used for representation of the parent-child relation.
      */
 
     private void printDFS(TreeNode<T> root, String spaces) {
