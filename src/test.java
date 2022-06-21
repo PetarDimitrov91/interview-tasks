@@ -1,20 +1,28 @@
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class test {
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
         String s = console.nextLine();
-        int a = 1234;
 
-        String[] b = Arrays.stream(Integer.toBinaryString(a).split(""))
-                .filter(e -> !e.equals("0"))
-                .map(Objects::toString)
-                .toArray(String[]::new);
 
-        //.count();
+    }
 
-        System.out.println(Arrays.toString(b));
+    private static String longestPalindrome(String s) {
+       String palindrome = "";
+
+        for (int i = 0; i < s.length() - 1; i++) {
+            for (int j = 0; j < s.length() - 1; j++) {
+                if (s.charAt(i) == s.charAt(j + 1)){
+
+                }
+            }
+        }
+
+        return palindrome;
     }
 }
+//reverse(str.substring(1)) + str.charAt(0)
+
+
+//babab
